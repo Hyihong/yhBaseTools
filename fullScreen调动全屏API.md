@@ -13,6 +13,8 @@
 
 * 坑一： 各大浏览器提供给JS调用的都是前缀版本，命名各不同，我还掉入了拼写的坑。
 * 坑二： 请求全屏的方法requestFullscreen()需要通过Element调用，目前发现IE的document.documentElement上没有绑定该方法，其他浏览器则是支持通过document.documentElement的。IE我通过body元素来调用。
+* 坑三：requestFullscreen方法只能由用户操作触发（如onclick事件），在onload事件中调用此方法将无效。所以别想一进页面就全屏。
+* 坑四：通过API调用的全屏事件，与F11没有半毛钱关系;API是让某个Element全屏显示，而F11只是隐藏掉浏览器的工具栏。
 
 ## 上代码
 ```js
@@ -59,7 +61,10 @@ var fullScreen = {
 ```
 
 
+## 后续
+本来以为完美地调用了api,后面经测试才发现，这里的全屏和F11的全屏会造成冲突。试了很多方法，觉得最经济的就是直接禁用掉F11的默认事件。 
 
+因为在全屏状态下，JS无法监听 `keydown` 事件，查了资料解释原因是： 浏览器的特定行为，防止开发者恶意全屏。
 
 
 
