@@ -33,9 +33,7 @@ function curryIt(fn) {
 var result = curryIt(fn)(1)(2)(3);
 
 
-
-
-
+// 加权排序和赋值技术
 
 
 
